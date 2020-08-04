@@ -109,6 +109,16 @@ function combineRow(direction){
 
             
             if(direction === 'right'){
+                // process the filteredrow for two similar values and start from the right
+                for(let j = filteredRow.length - 1; j > 0; j--){
+                    if(filteredRow[j] === filteredRow[j-1]){
+                        filteredRow[j] += filteredRow[j-1];
+                        filteredRow[j-1] = 0;
+                    }else if(filteredRow[j] === 0){
+                        filteredRow[j] = filteredRow[j-1];
+                        filteredRow[j-1] = 0
+                    }
+                }
 
                 //create a row of missing 0's according to the filtered row length
                 let missingZeros = Array(4 - filteredRow.length).fill(0);
