@@ -67,6 +67,8 @@ function processKeyPress(e){
                 break;
         }
         addRandom();
+        updateScore();
+        checkForWin();
     } else{
         // Play Again?
     }
@@ -84,7 +86,7 @@ function checkIfEmpty(){
     if(zeroCounter === 0){
         // game over
         document.querySelector('#statusMessage').textContent = "You Lose!";
-        document.removeEventListener('keyup',(e) => {processKeyPress(e)})
+        document.removeEventListener('keyup', ()=>{});
         return false;
     } else{
         return true;
@@ -106,17 +108,23 @@ function combineRow(direction){
 
             // filter through to get only the nonzero items
             let filteredRow = row.filter(item => item > 0);
-
             
             if(direction === 'right'){
                 // process the filteredrow for two similar values and start from the right
                 for(let j = filteredRow.length - 1; j > 0; j--){
                     if(filteredRow[j] === filteredRow[j-1]){
+
                         filteredRow[j] += filteredRow[j-1];
                         filteredRow[j-1] = 0;
+
+                        // On combination add the new tile's values to the score
+                        score += filteredRow[j];
+
                     }else if(filteredRow[j] === 0){
+
                         filteredRow[j] = filteredRow[j-1];
                         filteredRow[j-1] = 0
+
                     }
                 }
                 //create a row of missing 0's according to the filtered row length
@@ -131,8 +139,13 @@ function combineRow(direction){
                 // process the filteredrow for two similar values and start from the left
                 for(let j = 0; j < filteredRow.length - 1; j++){
                     if(filteredRow[j] === filteredRow[j+1]){
+
                         filteredRow[j] += filteredRow[j+1];
                         filteredRow[j+1] = 0;
+
+                        // On combination add the new tile's values to the score
+                        score += filteredRow[j];
+
                     }else if(filteredRow[j] === 0){
                         filteredRow[j] = filteredRow[j+1];
                         filteredRow[j+1] = 0
@@ -170,21 +183,54 @@ function combineColumn(direction){
 
             
         if(direction === 'up'){
+            // process the filteredColumn for two similar values and start from the left
+            for(let j = 0; j < filteredColumn.length - 1; j++){
+                if(filteredColumn[j] === filteredColumn[j+1]){
 
-            //create a row of missing 0's according to the filtered row length
+                    filteredColumn[j] += filteredColumn[j+1];
+                    filteredColumn[j+1] = 0;
+
+                    // On combination add the new tile's values to the score
+                    score += filteredColumn[j];
+
+                }else if(filteredColumn[j] === 0){
+
+                    filteredColumn[j] = filteredColumn[j+1];
+                    filteredColumn[j+1] = 0
+
+                }
+            }
+
+            //create a row of missing 0's according to the filtered column length
             let missingZeros = Array(4 - filteredColumn.length).fill(0);
 
-            // create a new row with the zeros added according to direction
+            // create a new column with the zeros added according to direction
             filteredColumn = filteredColumn.concat(missingZeros);
 
 
         } else{
+            // down key pressed
+            // process the filteredColumn for two similar values and start from the right
+            for(let j = filteredColumn.length - 1; j > 0; j--){
+                if(filteredColumn[j] === filteredColumn[j-1]){
 
-            // left key pressed
-            //create a row of missing 0's according to the filtered row length
+                    filteredColumn[j] += filteredColumn[j-1];
+                    filteredColumn[j-1] = 0;
+
+                    // On combination add the new tile's values to the score
+                    score += filteredColumn[j];
+                    
+                }else if(filteredColumn[j] === 0){
+
+                    filteredColumn[j] = filteredColumn[j-1];
+                    filteredColumn[j-1] = 0
+
+                }
+            }
+            //create a column of missing 0's according to the filtered row length
             let missingZeros = Array(4 - filteredColumn.length).fill(0);
 
-            // create a new row with the zeros added according to direction
+            // create a new column with the zeros added according to direction
             filteredColumn = missingZeros.concat(filteredColumn);
         }
 
@@ -193,5 +239,19 @@ function combineColumn(direction){
         boxes[i+4].textContent = `${filteredColumn[1]}`;
         boxes[i+8].textContent = `${filteredColumn[2]}`;
         boxes[i+12].textContent = `${filteredColumn[3]}`;
+    }
+}
+
+// function to update score on the UI
+function updateScore(){
+    document.querySelector("#playerScore").textContent = `${score}`;
+}
+
+function checkForWin(){
+    for(box of boxes){
+        if(box.textContent === '8'){
+            document.querySelector('#statusMessage').textContent = "You Win!";
+            document.removeEventListener('keyup', ()=>{});
+        }
     }
 }
