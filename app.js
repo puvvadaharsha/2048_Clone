@@ -249,7 +249,7 @@ function updateScore(){
 
 function checkForWin(){
     for(box of boxes){
-        if(box.textContent === '8'){
+        if(box.textContent === '2048'){
             document.querySelector('#statusMessage').textContent = "You Win!";
             document.removeEventListener('keyup', ()=>{});
         }
