@@ -1,0 +1,134 @@
+:root{
+    /* Colors */
+    --backgroundColor: #faf8ef;
+    --firstColor: rgba(238, 228, 218, 0.9);
+    --goldColor: rgb(247, 219, 127);
+    --greyColor: rgb(223, 223, 223);
+    --statusColor: rgb(238, 146, 146);
+    --outlineColor: rgba(61, 50, 50, 0.25);
+    --textColor:rgb(65, 65, 65);
+
+    /* Grid Properties */
+    --gridWidth: 400px;
+    --gridHeight: 400px;
+
+    /* Box Propoerties */
+    --boxHeight: 100px;
+    --boxWidth: 100px;
+}
+
+/* Reset CSS */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--textColor)
+}
+
+body{
+    background: var(--backgroundColor);
+    border: dashed 1px var(--outlineColor);
+    border-radius: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0.5rem auto;
+    max-width: 95%;
+    overflow: hidden;
+    text-align: center;
+}
+
+/* Formatting the header */
+.header{
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.5rem;
+
+}
+
+.score{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+/* Main header: 2048 */
+#mainHeading{
+    color: var(--goldColor);
+    font-size: 3rem;
+    padding-right: 0.5rem;
+
+}
+
+.scoreBox{
+    background: var(--greyColor);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 0.25rem 0.5rem;
+}
+#playerScore{
+    color: var(--statusColor);
+}
+
+/* Formatting for instruction P tag */
+#instructions{
+    margin: 0.5rem;
+    padding: 0.25rem 0.5rem;
+}
+
+
+/* Formatting for status message */
+#statusMessage{
+    color: var(--statusColor);
+    font-size: 2rem;
+}
+
+
+/* Formatting for the grid */
+.grid{
+    background: var(--firstColor);
+    border-radius: 2px;
+    display: flex;
+    flex-wrap: wrap;
+    height: var(--gridHeight);
+    margin: 1rem auto;
+    width: var(--gridWidth);  
+}
+
+/* formatting for individual boxes */
+.box{
+    background: var(--greyColor);
+    border: solid 0.3px rgba(58, 58, 58, 0.4);
+    font-size: 2rem;
+    height: var(--boxHeight);
+    line-height: 100px;
+    width: var(--boxWidth);
+    
+}
+
+/* For tablet */
+@media(max-width: 768px){
+    /* box will be 90px */
+    .grid{
+        height: 360px;
+        width: 360px;  
+    }
+    .box{
+        width: 90px;
+        height: 90px;
+        line-height: 90px;
+    }
+}
+/* For really small screens */
+@media(max-width: 500px){
+    /* box will be 70px */
+    .grid{
+        height: 280px;
+        width: 280px;  
+    }
+    .box{
+        width: 70px;
+        height: 70px;
+        line-height: 70px;
+    }
+}
