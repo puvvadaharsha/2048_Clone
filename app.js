@@ -39,39 +39,37 @@ function addRandom(){
     //Add 2 only if box value is 0
     if(boxes[random].textContent === "0"){
         boxes[random].textContent = "2";
-        boxes[random].style.background = 'white';
+        boxes[random].classList.add('flash');
         //highlight the new block added
         setTimeout(() => {
-            boxes[random].style.background = '';
+            boxes[random].classList.remove('flash');
+            boxes[random].classList.add('box2');
         }, 300);
+        checkIfEmpty();
     } else{addRandom();}
 }
 
 // process key press
 function processKeyPress(e){
-    // check if theres any empty slots left
-    if(checkIfEmpty()){
-        let code = e.keyCode;
-        switch (code){
-            case 38:
-                combineColumn('up');
-                break;
-            case 39:
-                combineRow('right');
-                break;
-            case 40:
-                combineColumn('down');
-                break;
-            case 37:
-                combineRow('left');
-                break;
-        }
-        addRandom();
-        updateScore();
-        checkForWin();
-    } else{
-        // Play Again?
+    let code = e.keyCode;
+    switch (code){
+        case 38:
+            combineColumn('up');
+            break;
+        case 39:
+            combineRow('right');
+            break;
+        case 40:
+            combineColumn('down');
+            break;
+        case 37:
+            combineRow('left');
+            break;
     }
+    beautifyBoxes();
+    updateScore();
+    checkForWin();
+    addRandom();
 }
 
 // checks if theres any '0' in the boxes
@@ -85,11 +83,8 @@ function checkIfEmpty(){
     //no space to add a random '2' anymore
     if(zeroCounter === 0){
         // game over
-        document.querySelector('#statusMessage').textContent = "You Lose!";
+        document.querySelector('#statusMessage').textContent = `You Lose! Your score was ${score}!`;
         document.removeEventListener('keyup', ()=>{});
-        return false;
-    } else{
-        return true;
     }
 }
 
@@ -166,7 +161,6 @@ function combineRow(direction){
         }
     }
 }
-
 
 function combineColumn(direction){
     for(let i = 0; i < 4; i++){
@@ -252,6 +246,48 @@ function checkForWin(){
         if(box.textContent === '2048'){
             document.querySelector('#statusMessage').textContent = "You Win!";
             document.removeEventListener('keyup', ()=>{});
+        }
+    }
+}
+
+// Adds color according to the value in the box
+function beautifyBoxes(){
+    for(box of boxes){
+        box.classList = 'box';
+        switch(box.textContent){
+            case '2':
+                box.classList.add('box2');
+                break;
+            case '4':
+                box.classList.add('box4');
+                break;
+            case '8':
+                box.classList.add('box8');
+                break;
+            case '16':
+                box.classList.add('box16');
+                break;
+            case '32':
+                box.classList.add('box32');
+                break;
+            case '64':
+                box.classList.add('box64');
+                break;
+            case '128':
+                box.classList.add('box128');
+                break;
+            case '256':
+                box.classList.add('box256');
+                break;
+            case '512':
+                box.classList.add('box512');
+                break;
+            case '1024':
+                box.classList.add('box1024');
+                break;
+            case '2056':
+                box.classList.add('box2056');
+                break;
         }
     }
 }

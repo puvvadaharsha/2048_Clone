@@ -1,12 +1,12 @@
 :root{
     /* Colors */
     --backgroundColor: #faf8ef;
-    --firstColor: rgba(238, 228, 218, 0.9);
-    --goldColor: rgb(247, 219, 127);
-    --greyColor: rgb(223, 223, 223);
-    --statusColor: rgb(238, 146, 146);
-    --outlineColor: rgba(61, 50, 50, 0.25);
-    --textColor:rgb(65, 65, 65);
+    --firstColor: #eee4dae6;
+    --goldColor: #f7db7f;
+    --greyColor: #dfdfdf;
+    --statusColor: #ee9292;
+    --outlineColor: #3d323240;
+    --textColor:#414141;
 
     /* Grid Properties */
     --gridWidth: 400px;
@@ -103,6 +103,47 @@ body{
     line-height: 100px;
     width: var(--boxWidth);
 }
+
+
+/* box colors */
+.flash{
+    background: #d1c2c2;
+}
+.box2{
+    background: #EE9292;
+}
+.box4{
+    background: #EF9990;
+}
+.box8{
+    background: #F0A18E;
+}
+.box16{
+    background: #F1A88C;
+}
+.box32{
+    background: #F2AF8A;
+}
+.box64{
+    background: #F3B789;
+}
+.box128{
+    background: #F3BE87;
+}
+.box256{
+    background: #F4C585;
+}
+.box512{
+    background: #F5CC83;
+}
+.box1024{
+    background: #F6D481;
+}
+.box2048{
+    background: #F7DB7F;
+}
+
+
 
 /* For tablet */
 @media(max-width: 768px){
