@@ -107,7 +107,7 @@ body{
 
 /* box colors */
 .flash{
-    background: #d1c2c2;
+    background: rgb(255, 255, 255);
 }
 .box2{
     background: #EE9292;

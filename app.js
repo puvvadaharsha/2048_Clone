@@ -33,6 +33,7 @@ function initializeGrid(){
 
 // adds random box of value 2
 function addRandom(){
+
     // pick random number between 0 and 15
     let random = Math.floor(Math.random() * 16);
 
@@ -44,38 +45,37 @@ function addRandom(){
         setTimeout(() => {
             boxes[random].classList.remove("flash");
             boxes[random].classList.add("box2");
-        }, 300);
-        checkIfEmpty();
+        }, 200);
     } else{addRandom();}
 }
 
 // process key press
 function processKeyPress(e){
-
-    let code = e.keyCode;
-    let oldBoxArray = makeCopy(boxes);
-
-    if([38,39,40,37].includes(code)){
-        switch (code){
-            case 38:
-                combineColumn('up');
-                break;
-            case 39:
-                combineRow('right');
-                break;
-            case 40:
-                combineColumn('down');
-                break;
-            case 37:
-                combineRow('left');
-                break;
-        }
-        updateScore();
-        beautifyBoxes();
-
-        // add a new box only if something has moved
-        if(checkIfBoxesChanged(oldBoxArray)){
-            addRandom();
+    if(checkIfEmpty()){
+        let code = e.keyCode;
+        let oldBoxArray = makeCopy(boxes);
+    
+        if([38,39,40,37].includes(code)){
+            switch (code){
+                case 38:
+                    combineColumn('up');
+                    break;
+                case 39:
+                    combineRow('right');
+                    break;
+                case 40:
+                    combineColumn('down');
+                    break;
+                case 37:
+                    combineRow('left');
+                    break;
+            }
+            updateScore();
+            beautifyBoxes();
+            // add a new box only if something has moved
+            if(checkIfBoxesChanged(oldBoxArray)){
+                addRandom();
+            }
         }
     }
 }
@@ -117,6 +117,9 @@ function checkIfEmpty(){
         // game over
         document.querySelector('#statusMessage').textContent = `You Lose! Your score was ${score}!`;
         document.removeEventListener('keyup', ()=>{});
+        return false;
+    }else{
+        return true;
     }
 }
 
@@ -154,6 +157,7 @@ function combineRow(direction){
 
                     }
                 }
+                
                 //create a row of missing 0's according to the filtered row length
                 let missingZeros = Array(4 - filteredRow.length).fill(0);
 
@@ -286,6 +290,7 @@ function checkForWin(){
 function beautifyBoxes(){
     for(box of boxes){
         box.classList.remove('flash','box2','box4','box8', 'box16', 'box32','box64','box128','box256','box512','box1024','box2048');
+
         switch(box.textContent){
             case '2':
                 box.classList.add('box2');
