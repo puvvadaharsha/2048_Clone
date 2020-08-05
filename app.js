@@ -150,6 +150,9 @@ function combineRow(direction){
                         // On combination add the new tile's values to the score
                         score += filteredRow[j];
 
+                        // filter out the middle zero's again
+                        filteredRow = filteredRow.filter(item => item > 0);
+
                     }else if(filteredRow[j] === 0){
 
                         filteredRow[j] = filteredRow[j-1];
@@ -176,6 +179,9 @@ function combineRow(direction){
 
                         // On combination add the new tile's values to the score
                         score += filteredRow[j];
+
+                        // filter out the zero's again
+                        filteredRow = filteredRow.filter(item => item > 0);
 
                     }else if(filteredRow[j] === 0){
                         filteredRow[j] = filteredRow[j+1];
@@ -223,6 +229,9 @@ function combineColumn(direction){
                     // On combination add the new tile's values to the score
                     score += filteredColumn[j];
 
+                    // filter out the zero's again
+                    filteredColumn = filteredColumn.filter(item => item > 0);
+
                 }else if(filteredColumn[j] === 0){
 
                     filteredColumn[j] = filteredColumn[j+1];
@@ -249,7 +258,11 @@ function combineColumn(direction){
 
                     // On combination add the new tile's values to the score
                     score += filteredColumn[j];
-                    
+
+
+                    // filter out the zero's again
+                    filteredColumn = filteredColumn.filter(item => item > 0);
+
                 }else if(filteredColumn[j] === 0){
 
                     filteredColumn[j] = filteredColumn[j-1];
