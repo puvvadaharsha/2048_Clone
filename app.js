@@ -51,25 +51,58 @@ function addRandom(){
 
 // process key press
 function processKeyPress(e){
+
     let code = e.keyCode;
-    switch (code){
-        case 38:
-            combineColumn('up');
-            break;
-        case 39:
-            combineRow('right');
-            break;
-        case 40:
-            combineColumn('down');
-            break;
-        case 37:
-            combineRow('left');
-            break;
+    let oldBoxArray = makeCopy(boxes);
+
+    if([38,39,40,37].includes(code)){
+        switch (code){
+            case 38:
+                combineColumn('up');
+                break;
+            case 39:
+                combineRow('right');
+                break;
+            case 40:
+                combineColumn('down');
+                break;
+            case 37:
+                combineRow('left');
+                break;
+        }
+    
+        beautifyBoxes();
+        updateScore();
+        
+        // add a new box only if something has moved
+        if(checkIfBoxesChanged(oldBoxArray)){
+            addRandom();
+        }
     }
-    beautifyBoxes();
-    updateScore();
-    checkForWin();
-    addRandom();
+}
+
+// create an integer list of the old array
+function makeCopy(oldBoxArray){
+    let copy = [];
+    for(box of oldBoxArray){
+        copy.push(parseInt(box.textContent));
+    }
+    return copy;
+}
+
+// checks if the boxes array changed
+function checkIfBoxesChanged(oldBoxArray){
+    let change = 0;
+    for(let i = 0; i < oldBoxArray.length; i++){
+        if(oldBoxArray[i] !== parseInt(boxes[i].textContent)){
+            change++;
+        }
+    }
+    if(change > 0){
+        return true;
+    }else{
+        return false;
+    }
 }
 
 // checks if theres any '0' in the boxes
