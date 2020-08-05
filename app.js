@@ -39,11 +39,11 @@ function addRandom(){
     //Add 2 only if box value is 0
     if(boxes[random].textContent === "0"){
         boxes[random].textContent = "2";
-        boxes[random].classList.add('flash');
+        boxes[random].classList.add("flash");
         //highlight the new block added
         setTimeout(() => {
-            boxes[random].classList.remove('flash');
-            boxes[random].classList.add('box2');
+            boxes[random].classList.remove("flash");
+            boxes[random].classList.add("box2");
         }, 300);
         checkIfEmpty();
     } else{addRandom();}
@@ -70,10 +70,9 @@ function processKeyPress(e){
                 combineRow('left');
                 break;
         }
-    
-        beautifyBoxes();
         updateScore();
-        
+        beautifyBoxes();
+
         // add a new box only if something has moved
         if(checkIfBoxesChanged(oldBoxArray)){
             addRandom();
@@ -286,7 +285,7 @@ function checkForWin(){
 // Adds color according to the value in the box
 function beautifyBoxes(){
     for(box of boxes){
-        box.classList = 'box';
+        box.classList.remove('flash','box2','box4','box8', 'box16', 'box32','box64','box128','box256','box512','box1024','box2048');
         switch(box.textContent){
             case '2':
                 box.classList.add('box2');

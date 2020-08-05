@@ -143,7 +143,10 @@ body{
     background: #F7DB7F;
 }
 
-
+.footer{
+    font-style: italic;
+    margin: 0.5rem 1rem;
+}
 
 /* For tablet */
 @media(max-width: 768px){
