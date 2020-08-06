@@ -12,7 +12,7 @@
     --gridWidth: 400px;
     --gridHeight: 400px;
 
-    /* Box Propoerties */
+    /* Box Properties */
     --boxHeight: 100px;
     --boxWidth: 100px;
 }
@@ -145,7 +145,7 @@ body{
 
 .footer{
     font-style: italic;
-    margin: 0.5rem 1rem;
+    margin: 8rem 1rem 0.5rem 1rem;
 }
 
 /* For tablet */
@@ -160,6 +160,10 @@ body{
         height: 90px;
         line-height: 90px;
     }
+    .footer{
+        font-style: italic;
+        margin: 6rem 1rem 0.5rem 1rem;
+    }
 }
 /* For really small screens */
 @media(max-width: 500px){
@@ -172,5 +176,9 @@ body{
         width: 70px;
         height: 70px;
         line-height: 70px;
+    }
+    .footer{
+        font-style: italic;
+        margin: 2rem 1rem 0.5rem 1rem;
     }
 }
