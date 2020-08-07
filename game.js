@@ -10,6 +10,7 @@ class Game{
     // initializes 4x4 grid
     initializeGrid(){
         const grid = document.querySelector(".grid");
+        grid.innerHTML = '';
         for(let i = 0; i < 16; i++){
 
             // create new div with class of box and value of 0
@@ -53,8 +54,8 @@ class Game{
         //no space to add a random '2' anymore
         if(zeroCounter === 0){
             // game over
-            document.querySelector('#statusMessage').textContent = `You Lose! Your score was ${this.score}!`;
-            this.removeAllEventListeners();
+            document.querySelector('#statusMessage').textContent = `You Lose! Your score was ${document.querySelector('#playerScore').textContent}!`;
+            this.endGame();
             return true;
         }else{
             return false;
@@ -63,17 +64,24 @@ class Game{
     checkForWin(){
         for(let box of this.boxes){
             if(box.textContent === '2048'){
-                document.querySelector('#statusMessage').textContent = "You Win!";
-                this.removeAllEventListeners();
+                document.querySelector('#statusMessage').textContent = `You Win! Your Score was ${document.querySelector('#playerScore').textContent}!`;
+                this.endGame();
             }
         }
     }
 
-    removeAllEventListeners(){
-        //listen for keyPresses
-        document.removeEventListener('keyup', (e) =>{this.processKeyPress(e)});
-        document.removeEventListener('touchstart', (e) => {this.handleTouchStart(e)});
-        document.removeEventListener('touchend', (e) => {this.handleTouchEnded(e)});
+    endGame(){
+        const grid = document.querySelector(".grid");
+        if(document.querySelector('#playAgainButton') == null){
+
+            let htmlString = "<div id='overlay'><button id='playAgainButton'>Play Again?</button></div>";
+
+            grid.innerHTML += htmlString;
+
+            document.querySelector('#playAgainButton').addEventListener('click',()=>{
+                location.reload();
+            });
+        }
     }
 
     combineRow(direction){
@@ -240,7 +248,9 @@ class Game{
 
     // function to update score on the UI
     updateScore(){
-        document.querySelector("#playerScore").textContent = `${this.score}`;
+        if(document.querySelector('#playAgainButton') == null){
+            document.querySelector("#playerScore").textContent = `${this.score}`;
+        }
     }
 
     // Adds color according to the value in the box

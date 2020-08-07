@@ -80,7 +80,7 @@ body{
 /* Formatting for status message */
 #statusMessage{
     color: var(--statusColor);
-    font-size: 2rem;
+    font-size: 1.3rem;
 }
 
 /* Formatting for the grid */
@@ -104,6 +104,31 @@ body{
     width: var(--boxWidth);
 }
 
+/* Format the overlay */
+#overlay{
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    background-color: rgba(248, 242, 231, 0.4);
+    z-index: 2;
+}
+
+/* Format play again button */
+#playAgainButton{
+    background: var(--greyColor);
+    border: solid 1px black;
+    border-radius: 5px;
+    color: var(--textColor);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+    position: relative;
+    top: 40%;
+    cursor: pointer;
+    z-index: 3;
+}
+#playAgainButton:hover{
+    background-color: var(--goldColor);
+}
 
 /* box colors */
 .flash{
@@ -164,6 +189,10 @@ body{
         font-style: italic;
         margin: 6rem 1rem 0.5rem 1rem;
     }
+    #overlay{
+        width: 360px;
+        height: 360px;
+    }
 }
 /* For really small screens */
 @media(max-width: 500px){
@@ -180,5 +209,9 @@ body{
     .footer{
         font-style: italic;
         margin: 2rem 1rem 0.5rem 1rem;
+    }
+    #overlay{
+        height: 280px;
+        width: 280px; 
     }
 }

@@ -3,8 +3,9 @@ class Keys{
     constructor(game){
 
         this.game = game;
+        this.handle = (e) =>{this.processKeyPress(e)};
         //listen for keyPresses
-        document.addEventListener('keyup', (e) =>{this.processKeyPress(e)});
+        document.addEventListener('keyup', this.handle);
     }
     // process key press
     processKeyPress(e){
