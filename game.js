@@ -74,7 +74,7 @@ class Game{
         const grid = document.querySelector(".grid");
         if(document.querySelector('#playAgainButton') == null){
 
-            let htmlString = "<div id='overlay'><button id='playAgainButton'>Play Again?</button></div>";
+            let htmlString = "<div id='overlay'><input type='button' id='playAgainButton' value='Play Again'>";
 
             grid.innerHTML += htmlString;
 
